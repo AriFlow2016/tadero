@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="sv" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tadero – Future Tech Consulting</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Interaktiv muspekare -->
+    <div class="spotlight-cursor"></div>
+
+    <!-- Dold Easter Egg -->
+    <div id="easter-egg" class="hidden">
+        <pre id="ascii-logo">
+ _______        __
+|    |  |.----.|  |--.-----.-----.-----.
+|       ||  __||     |  -__|__ --|__ --|
+|__|____||____||__|__|_____|_____|_____|
+        </pre>
+        <p>System Access Granted // Välkommen till Tadero</p>
+        <small>(Tryck på Esc för att stänga)</small>
+    </div>
+
+    <!-- HERO MED AI-GRÄNSSNITT -->
+    <section class="hero">
+        <div class="video-overlay"></div>
+        
+        <div id="ai-interface">
+            <div class="scanline"></div>
+            <h1 class="ai-title">Taderos AI</h1>
+            <div id="ai-output">
+                <p id="ai-text"></p>
+            </div>
+            <div class="ai-prompt">
+                <input type="text" id="ai-input" placeholder="Ställ en fråga om framtidens teknik..." autocomplete="off">
+                <button id="ai-submit">Skicka</button>
+            </div>
+        </div>
+
+        <!-- IP-adress visning -->
+        <div id="ip-display">Ansluten från: <span>Laddar...</span></div>
+
+        <div class="scroll-icon" onclick="document.getElementById('main-content').scrollIntoView({behavior: 'smooth'});">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+        </div>
+    </section>
+
+    <!-- Huvudinnehålls-wrapper -->
+    <div id="main-content">
+        <!-- NAVIGERING -->
+        <header class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <img src="images/tadero-logga.png" alt="Tadero Logotyp">
+                </a>
+                <ul>
+                    <li><a href="#tjanster">Tjänster</a></li>
+                    <li><a href="#projekt">Projekt</a></li>
+                    <li><a href="#omoss">Om Oss</a></li>
+                    <li><a href="#kontakt" role="button" class="contrast">Kontakta oss</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="container">
+            <!-- TJÄNSTER -->
+            <section id="tjanster" class="fade-in">
+                <hgroup>
+                    <h2 data-scramble="true">Våra Tjänster</h2>
+                    <h3>Tekniklösningar för framtiden.</h3>
+                </hgroup>
+                <div class="grid">
+                    <article data-tilt>
+                        <img src="images/service-mobile.jpg" alt="Mobilservice och teknisk reparation">
+                        <h4 class="card-title">Mobil- & teknisk service</h4>
+                        <p>Professionell reparation och service av mobiler, surfplattor och datorer för företag och privatpersoner.</p>
+                        <a href="mailto:info@tadero.se" role="button" class="cta">Kontakta oss</a>
+                    </article>
+                    <article data-tilt>
+                        <img src="images/service-it.jpg" alt="IT-infrastruktur och nätverk">
+                        <h4 class="card-title">IT-infrastruktur</h4>
+                        <p>Vi designar, installerar och underhåller säkra och skalbara nätverk, servrar och molnlösningar.</p>
+                        <a href="mailto:info@tadero.se" role="button" class="cta">Kontakta oss</a>
+                    </article>
+                    <article data-tilt>
+                        <img src="images/service-code.jpg" alt="Programmering och systemutveckling">
+                        <h4 class="card-title">Programmering & utveckling</h4>
+                        <p>Från skräddarsydda hemsidor och webbappar till avancerade systemintegrationer och mjukvara.</p>
+                        <a href="mailto:info@tadero.se" role="button" class="cta">Kontakta oss</a>
+                    </article>
+                </div>
+            </section>
+
+            <!-- NY SEKTION: UTVALDA PROJEKT -->
+            <section id="projekt" class="fade-in">
+                <hgroup>
+                    <h2 data-scramble="true">Utvalda Projekt</h2>
+                    <h3>Från vision till verklighet.</h3>
+                </hgroup>
+                <div class="grid">
+                    <article class="project-card" data-tilt>
+                        <div class="glitch-wrapper">
+                            <img src="images/project-ecommerce.jpg" alt="E-handelsplattform">
+                        </div>
+                        <div class="project-content">
+                            <h4 class="card-title">Skalbar E-handelsplattform</h4>
+                            <p>Vi transformerade en traditionell butiks digitala närvaro med en blixtsnabb och användarvänlig e-handelslösning, vilket resulterade i 40% ökad konvertering.</p>
+                            <div class="project-tags">
+                                <span>React</span><span>Node.js</span><span>Cloud</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="project-card" data-tilt>
+                        <div class="glitch-wrapper">
+                            <img src="images/project-app.jpg" alt="Mobilapp för logistik">
+                        </div>
+                        <div class="project-content">
+                            <h4 class="card-title">Logistik-app för Startup</h4>
+                            <p>Utveckling av en plattformsoberoende mobilapp som effektiviserade kundens logistikflöden och minskade administrativa kostnader med över 25%.</p>
+                            <div class="project-tags">
+                                <span>Flutter</span><span>Firebase</span><span>UX/UI</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="project-card" data-tilt>
+                        <div class="glitch-wrapper">
+                            <img src="images/project-telephony.jpg" alt="IT och Telefoni översikt">
+                        </div>
+                        <div class="project-content">
+                            <h4 class="card-title">Effektivisering av IT & Telefoni</h4>
+                            <p>Genom en strategisk översyn av kundens hela IT- och telefonilösning identifierade och implementerade vi nya system som sänkte deras årliga driftskostnader med 30%.</p>
+                            <div class="project-tags">
+                                <span>Molnväxel</span><span>Infrastruktur</span><span>Kostnadsanalys</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+            
+            <!-- NY SEKTION: AI-GENERERAD KONST -->
+            <section id="ai-art" class="fade-in">
+                <hgroup>
+                    <h2 data-scramble="true">AI-Genererad Konst</h2>
+                    <h3>Varje klick skapar ett unikt, AI-genererat konstverk.</h3>
+                </hgroup>
+                <div id="ai-art-container">
+                    <div id="ai-art-loader" class="hidden">
+                        <div class="spinner"></div>
+                        <p>Genererar bild...</p>
+                    </div>
+                    <img id="ai-art-image" src="https://placehold.co/1024x1024/111111/3bbef8?text=Klicka+f%C3%B6r+att+generera+AI-konst" alt="AI-genererad bild">
+                </div>
+                <button id="generate-art-button">Generera Ny Bild</button>
+            </section>
+
+            <!-- OM OSS med partikelbakgrund -->
+            <section id="omoss" class="fade-in particle-section">
+                <div id="particles-js"></div>
+                <div class="content-over-particles">
+                    <hgroup>
+                        <h2 data-scramble="true">Varför Tadero?</h2>
+                        <h3>Erfarenhet och resultat du kan lita på.</h3>
+                    </hgroup>
+                    <p>Med över två decennier i teknikbranschen är Tadero inte bara en leverantör – vi är er strategiska partner för allt som rör digitalisering. Vår breda expertis garanterar helhetslösningar som är både robusta och innovativa. Vi har levererat hundratals framgångsrika projekt och förvaltar idag kritisk infrastruktur för en lång rad nöjda kunder. Siffrorna talar för sig själva.</p>
+                    <div class="stats-container grid">
+                        <div class="stat">
+                            <span class="counter" data-target="20">0</span>+
+                            <p class="stat-label">Års Erfarenhet</p>
+                        </div>
+                        <div class="stat">
+                            <span class="counter" data-target="300">0</span>+
+                            <p class="stat-label">Byggda Hemsidor</p>
+                        </div>
+                        <div class="stat">
+                            <span class="counter" data-target="100">0</span>+
+                            <p class="stat-label">Byggda Appar</p>
+                        </div>
+                        <div class="stat">
+                            <span class="counter" data-target="500">0</span>+
+                            <p class="stat-label">Lagade Enheter</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NY SEKTION: KUNDCITAT -->
+            <section id="testimonials" class="fade-in">
+                 <hgroup>
+                    <h2 data-scramble="true">Vad våra kunder säger</h2>
+                </hgroup>
+                <article class="testimonial-card">
+                    <blockquote>
+                        "Taderos förmåga att förvandla våra komplexa tekniska behov till en konkret, fungerande lösning var ovärderlig. De är inte bara experter, de är sanna partners som genuint bryr sig om vår framgång."
+                    </blockquote>
+                    <footer class="testimonial-author">
+                        – Anna Svensson, VD på Innovatech Solutions
+                    </footer>
+                </article>
+            </section>
+
+            <!-- UPPDATERAD SEKTION: KONTAKTA OSS -->
+            <section id="kontakt" class="fade-in">
+                <hgroup>
+                    <h2 data-scramble="true">Kontakta Oss</h2>
+                    <p>Har du en idé eller ett projekt du vill diskutera? Fyll i formuläret nedan så återkommer vi.</p>
+                </hgroup>
+                <form>
+                    <input type="text" id="name" name="name" placeholder="Ditt namn" required>
+                    <textarea id="message" name="message" placeholder="Ditt meddelande..." required rows="5"></textarea>
+                    <button type="submit">Skicka Meddelande</button>
+                </form>
+            </section>
+        </main>
+
+        <!-- SIDFOT -->
+        <footer class="container">
+            <small>
+                © 2025 Tadero • <a href="mailto:info@tadero.se">info@tadero.se</a> • <a href="#">Integritetspolicy</a>
+            </small>
+        </footer>
+    </div>
+    
+    <!-- Förenklad Cookie Banner -->
+    <div id="cookie-consent-banner" class="hidden">
+        <p>Vi använder cookies för att spåra din anslutning och förbättra din upplevelse.</p>
+        <button id="accept-cookies">Acceptera</button>
+    </div>
+    
+    <!-- Script för partikeleffekten -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <!-- Script för tilt-effekten -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
+    <!-- Egen JavaScript-fil -->
+    <script src="script.js"></script>
+</body>
+</html>
