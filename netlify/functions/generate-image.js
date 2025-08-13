@@ -16,7 +16,7 @@ exports.handler = async function(event, context) {
                 parts: [{ text: prompt }]
             }],
             generationConfig: {
-                responseModalities: ['IMAGE']
+                responseModalities: ['IMAGE', 'TEXT'] // KORRIGERAD
             },
         };
         
