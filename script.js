@@ -1,5 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // --- COOKIE CONSENT LOGIK (Förenklad) ---
+    const consentBanner = document.getElementById('cookie-consent-banner');
+    const acceptButton = document.getElementById('accept-cookies');
+
+    // Visa bannern om ingen cookie är satt
+    if (!document.cookie.split('; ').find(row => row.startsWith('tadero_consent='))) {
+        consentBanner.classList.remove('hidden');
+    }
+
+    acceptButton.addEventListener('click', () => {
+        document.cookie = "tadero_consent=true; max-age=31536000; path=/"; // Giltig i ett år
+        consentBanner.style.transform = 'translateY(100%)';
+        setTimeout(() => {
+            consentBanner.classList.add('hidden');
+        }, 500);
+    });
+
     // --- INTERAKTIV SPOTLIGHT-MUSPEKARE ---
     const spotlight = document.querySelector('.spotlight-cursor');
     if (spotlight) {
@@ -8,6 +25,20 @@ document.addEventListener('DOMContentLoaded', () => {
             spotlight.style.top = `${e.clientY}px`;
         });
     }
+
+    // --- HÄMTA IP-ADRESS ---
+    async function getIpAddress() {
+        try {
+            const response = await fetch('/.netlify/functions/get-ip');
+            if (!response.ok) throw new Error('Function not found');
+            const data = await response.json();
+            document.querySelector('#ip-display span').textContent = data.ip;
+        } catch (error) {
+            console.error("Kunde inte hämta IP-adress:", error);
+            document.querySelector('#ip-display span').textContent = 'Kunde inte hämtas';
+        }
+    }
+    getIpAddress();
 
     // --- AI-GRÄNSSNITT MED VERKLIG AI ---
     const aiOutput = document.getElementById('ai-text');
@@ -60,7 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
         typewriter("Analyserar förfrågan...", aiOutput);
 
         try {
-            // Anropa vår nya serverless function
             const response = await fetch('/.netlify/functions/ask-ai', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -91,6 +121,44 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
+    // --- AI-KONSTGENERATOR ---
+    const generateArtButton = document.getElementById('generate-art-button');
+    const aiArtImage = document.getElementById('ai-art-image');
+    const aiArtLoader = document.getElementById('ai-art-loader');
+
+    async function generateAiImage() {
+        aiArtLoader.classList.remove('hidden');
+        aiArtImage.style.opacity = '0.2';
+        generateArtButton.disabled = true;
+
+        try {
+            const response = await fetch('/.netlify/functions/generate-image', {
+                method: 'POST'
+            });
+
+            if (!response.ok) {
+                throw new Error(`Server error: ${response.statusText}`);
+            }
+            
+            const result = await response.json();
+            aiArtImage.src = `data:image/png;base64,${result.image}`;
+
+        } catch (error) {
+            console.error("Fel vid anrop till bildgenereringsfunktion:", error);
+            aiArtImage.src = "https://placehold.co/1024x1024/111111/ff0000?text=Fel+vid+generering";
+        } finally {
+            aiArtImage.onload = () => {
+                aiArtLoader.classList.add('hidden');
+                aiArtImage.style.opacity = '1';
+                generateArtButton.disabled = false;
+            }
+        }
+    }
+
+    if (generateArtButton) {
+        generateArtButton.addEventListener('click', generateAiImage);
+    }
+
     // --- FADE-IN & SCRAMBLE ANIMATION VID SCROLL ---
     const faders = document.querySelectorAll('.fade-in');
     const scramblers = document.querySelectorAll('[data-scramble="true"]');
@@ -120,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (statsSection) { statsObserver.observe(statsSection); }
 
     // --- PARTIKEL-NÄTVERK INITIALISERING ---
-    if (document.getElementById('particles-js')) {
+    if (typeof particlesJS !== 'undefined') {
         particlesJS('particles-js', {
             "particles": { "number": { "value": 80, "density": { "enable": true, "value_area": 800 } }, "color": { "value": "#3bbef8" }, "shape": { "type": "circle" }, "opacity": { "value": 0.5, "random": false }, "size": { "value": 3, "random": true }, "line_linked": { "enable": true, "distance": 150, "color": "#3bbef8", "opacity": 0.2, "width": 1 }, "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false } },
             "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true }, "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } }, "push": { "particles_nb": 4 } } },
@@ -138,14 +206,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const isMobile = window.innerWidth < 768;
 
     if (isMobile) {
-        VanillaTilt.init(document.querySelectorAll("[data-tilt]"), { max: 15, speed: 400, glare: true, "max-glare": 0.5 });
+        if (typeof VanillaTilt !== 'undefined') {
+            VanillaTilt.init(document.querySelectorAll("[data-tilt]"), { max: 15, speed: 400, glare: true, "max-glare": 0.5 });
+        }
+        
         const particleContainer = document.getElementById('particles-js');
         if (particleContainer && window.DeviceOrientationEvent) {
             window.addEventListener('deviceorientation', (event) => {
-                const gamma = event.gamma; const beta = event.beta;
+                const particleCanvas = particleContainer.querySelector('canvas');
+                if (!particleCanvas) return;
+
+                const gamma = event.gamma;
+                const beta = event.beta;
                 const moveX = Math.max(-40, Math.min(40, gamma * 1.5));
                 const moveY = Math.max(-40, Math.min(40, beta * 1.5));
-                particleContainer.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
+                
+                particleCanvas.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
             });
         }
     }
