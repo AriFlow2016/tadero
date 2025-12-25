@@ -13,18 +13,23 @@ exports.handler = async function(event, context) {
             return { statusCode: 400, body: 'Bad Request: userQuery is required' };
         }
 
-        const systemPrompt = `Du är Taderos AI, en expertassistent specialiserad på framtidens teknik, AI, programmering och IT-infrastruktur. Ditt syfte är att ge insiktsfulla och koncisa svar på teknikrelaterade frågor. Om en användare ställer en fråga som inte handlar om teknik (t.ex. sport, mat, kändisar), ska du artigt svara att ditt expertområde är teknik och att du tyvärr inte kan besvara den typen av fråga. Svara alltid på svenska.`;
+        // Systeminstruktion för att ge AI:n en personlighet
+        const systemPrompt = `Du är Taderos AI, en expertassistent specialiserad på framtidens teknik, AI, programmering och IT-infrastruktur. Ditt syfte är att ge insiktsfulla och koncisa svar på teknikrelaterade frågor. Svara alltid på svenska.`;
         
-        const chatHistory = [{ role: "user", parts: [{ text: systemPrompt + "\n\nAnvändarens fråga: " + userQuery }] }];
-        const payload = { contents: chatHistory };
+        const payload = {
+            contents: [{
+                parts: [{ text: systemPrompt + "\n\nAnvändarens fråga: " + userQuery }]
+            }]
+        };
         
-        // Här använder vi en miljövariabel för API-nyckeln för högsta säkerhet
+        // Hämtar API-nyckeln från Netlifys miljövariabler
         const apiKey = process.env.GEMINI_API_KEY;
         if (!apiKey) {
              throw new Error("API key is not configured on the server.");
         }
 
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+        // Vi använder gemini-1.5-flash som är stabil och snabb
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
 
         const response = await fetch(apiUrl, {
             method: 'POST',
@@ -33,12 +38,14 @@ exports.handler = async function(event, context) {
         });
 
         if (!response.ok) {
-            console.error("API Error:", response.statusText);
+            const errorData = await response.text();
+            console.error("API Error:", errorData);
             return { statusCode: response.status, body: `API Error: ${response.statusText}` };
         }
 
         const result = await response.json();
 
+        // Extraherar textsvaret från Googles API-struktur
         if (result.candidates && result.candidates.length > 0 && result.candidates[0].content.parts[0].text) {
             const aiResponse = result.candidates[0].content.parts[0].text;
             return {
