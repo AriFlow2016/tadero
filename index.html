@@ -4,29 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tadero – Future Tech Consulting</title>
-    <!-- Ny Favicon för att åtgärda 404-felet -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23050505%22/><text x=%2250%22 y=%2275%22 font-size=%2270%22 font-family=%22sans-serif%22 fill=%22%233bbef8%22 text-anchor=%22middle%22>T</text></svg>">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Interaktiv muspekare -->
     <div class="spotlight-cursor"></div>
 
-    <!-- Dold Easter Egg -->
-    <div id="easter-egg" class="hidden">
-        <pre id="ascii-logo">
- _______        __
-|    |  |.----.|  |--.-----.-----.-----.
-|       ||  __||     |  -__|__ --|__ --|
-|__|____||____||__|__|_____|_____|_____|
-        </pre>
-        <p>System Access Granted // Välkommen till Tadero</p>
-        <small>(Tryck på Esc för att stänga)</small>
-    </div>
-
-    <!-- HERO MED AI-GRÄNSSNITT -->
+    <!-- HERO MED AI-FOKUS -->
     <section class="hero">
         <div class="video-overlay"></div>
         
@@ -37,212 +23,90 @@
                 <p id="ai-text"></p>
             </div>
             <div class="ai-prompt">
-                <input type="text" id="ai-input" placeholder="Ställ en fråga om framtidens teknik..." autocomplete="off">
+                <input type="text" id="ai-input" placeholder="Fråga oss om framtidens teknik..." autocomplete="off">
                 <button id="ai-submit">Skicka</button>
             </div>
         </div>
 
-        <!-- IP-adress visning -->
         <div id="ip-display">Ansluten från: <span>Laddar...</span></div>
-
-        <div class="scroll-icon" onclick="document.getElementById('main-content').scrollIntoView({behavior: 'smooth'});">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
-        </div>
     </section>
 
-    <!-- Huvudinnehålls-wrapper -->
     <div id="main-content">
-        <!-- NAVIGERING -->
         <header class="container">
             <nav>
                 <a href="#" class="logo">
-                    <!-- Behåller den nya SVG-logotypen som du gillade -->
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='60' viewBox='0 0 200 60'%3E%3Cstyle%3E.text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; font-size: 40px; font-weight: 600; fill: %23e0e0e0; } .highlight { fill: %233bbef8; }%3C/style%3E%3Ctext x='10' y='45' class='text'%3ETader%3Ctspan class='highlight'%3Eo%3C/tspan%3E%3C/text%3E%3C/svg%3E" alt="Tadero Logotyp">
+                    <img src="images/tadero-logga.png" alt="Tadero Logotyp" style="height: 50px;">
                 </a>
                 <ul>
-                    <li><a href="#tjanster">Tjänster</a></li>
-                    <li><a href="#projekt">Projekt</a></li>
-                    <li><a href="#omoss">Om Oss</a></li>
-                    <li><a href="#kontakt" role="button" class="contrast">Kontakta oss</a></li>
+                    <li><a href="#expertis">Expertis</a></li>
+                    <li><a href="#om">Om oss</a></li>
+                    <li><a href="#kontakt" role="button" class="outline">Kontakt</a></li>
                 </ul>
             </nav>
         </header>
 
         <main class="container">
-            <!-- TJÄNSTER -->
-            <section id="tjanster" class="fade-in">
+            <!-- EXPERTISE & TJÄNSTER -->
+            <section id="expertis" class="fade-in">
                 <hgroup>
-                    <h2 data-scramble="true">Våra Tjänster</h2>
-                    <h3>Tekniklösningar för framtiden.</h3>
+                    <h2 data-scramble="true">Vår Expertis</h2>
+                    <h3>Vi bygger morgondagens digitala infrastruktur.</h3>
                 </hgroup>
                 <div class="grid">
-                    <article data-tilt>
-                        <!-- FIXAD: Ändrad till Apputveckling med ny bild och text -->
-                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop" alt="Apputveckling och UI/UX design">
-                        <h4 class="card-title">Apputveckling</h4>
-                        <p>Vi förvandlar din vision till en intuitiv och kraftfull mobilapp. Från idé och design till lansering och underhåll på iOS & Android.</p>
-                        <a href="mailto:info@tadero.se" role="button" class="cta">Kontakta oss</a>
+                    <article>
+                        <h4 class="card-title">Strategisk AI</h4>
+                        <p>Vi implementerar intelligenta lösningar som automatiserar och optimerar er affärsmodell.</p>
                     </article>
-                    <article data-tilt>
-                        <!-- Återställd till din ursprungliga bildsökväg -->
-                        <img src="images/service-it.jpg" alt="IT-infrastruktur och nätverk">
-                        <h4 class="card-title">IT-infrastruktur</h4>
-                        <p>Vi designar, installerar och underhåller säkra och skalbara nätverk, servrar och molnlösningar.</p>
-                        <a href="mailto:info@tadero.se" role="button" class="cta">Kontakta oss</a>
+                    <article>
+                        <h4 class="card-title">IT-Infrastruktur</h4>
+                        <p>Säkra, skalbara och moderna nätverkslösningar anpassade för framtidens krav.</p>
                     </article>
-                    <article data-tilt>
-                        <!-- Återställd till din ursprungliga bild -->
-                        <img src="https://images.unsplash.com/photo-1537432376769-00f5c2f4c8d2?q=80&w=1925&auto=format&fit=crop" alt="Programmering och systemutveckling">
-                        <h4 class="card-title">Programmering & utveckling</h4>
-                        <p>Från skräddarsydda hemsidor och webbappar till avancerade systemintegrationer och mjukvara.</p>
-                        <a href="mailto:info@tadero.se" role="button" class="cta">Kontakta oss</a>
+                    <article>
+                        <h4 class="card-title">Systemutveckling</h4>
+                        <p>Skräddarsydd mjukvara och webblösningar med fokus på prestanda och säkerhet.</p>
                     </article>
                 </div>
             </section>
 
-            <!-- NY SEKTION: UTVALDA PROJEKT -->
-            <section id="projekt" class="fade-in">
-                <hgroup>
-                    <h2 data-scramble="true">Utvalda Projekt</h2>
-                    <h3>Från vision till verklighet.</h3>
-                </hgroup>
+            <!-- OM OSS & STATS (KOMBINERAT) -->
+            <section id="om" class="fade-in">
                 <div class="grid">
-                    <article class="project-card" data-tilt>
-                        <div class="glitch-wrapper">
-                            <!-- Återställd till din ursprungliga bildsökväg -->
-                            <img src="images/project-ecommerce.jpg" alt="E-handelsplattform">
-                        </div>
-                        <div class="project-content">
-                            <h4 class="card-title">Skalbar E-handelsplattform</h4>
-                            <p>Vi transformerade en traditionell butiks digitala närvaro med en blixtsnabb och användarvänlig e-handelslösning, vilket resulterade i 40% ökad konvertering.</p>
-                            <div class="project-tags">
-                                <span>React</span><span>Node.js</span><span>Cloud</span>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="project-card" data-tilt>
-                        <div class="glitch-wrapper">
-                            <!-- Återställd till din ursprungliga bildsökväg -->
-                            <img src="images/project-app.jpg" alt="Mobilapp för logistik">
-                        </div>
-                        <div class="project-content">
-                            <h4 class="card-title">Logistik-app för Startup</h4>
-                            <p>Utveckling av en plattformsoberoende mobilapp som effektiviserade kundens logistikflöden och minskade administrativa kostnader med över 25%.</p>
-                            <div class="project-tags">
-                                <span>Flutter</span><span>Firebase</span><span>UX/UI</span>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="project-card" data-tilt>
-                        <div class="glitch-wrapper">
-                            <!-- Återställd till din ursprungliga bildsökväg -->
-                            <img src="images/project-telephony.jpg" alt="IT och Telefoni översikt">
-                        </div>
-                        <div class="project-content">
-                            <h4 class="card-title">Effektivisering av IT & Telefoni</h4>
-                            <p>Genom en strategisk översyn av kundens hela IT- och telefonilösning identifierade och implementerade vi nya system som sänkte deras årliga driftskostnader med 30%.</p>
-                            <div class="project-tags">
-                                <span>Molnväxel</span><span>Infrastruktur</span><span>Kostnadsanalys</span>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </section>
-            
-            <!-- NY SEKTION: AI-GENERERAD KONST -->
-            <section id="ai-art" class="fade-in">
-                <hgroup>
-                    <h2 data-scramble="true">AI-Genererad Konst</h2>
-                    <h3>Varje klick skapar ett unikt, AI-genererat konstverk.</h3>
-                </hgroup>
-                <div id="ai-art-container">
-                    <div id="ai-art-loader" class="hidden">
-                        <div class="spinner"></div>
-                        <p>Genererar bild...</p>
+                    <div>
+                        <h2 data-scramble="true">20 år av innovation</h2>
+                        <p>Tadero är en strategisk partner för företag som vill ligga i framkant. Med två decennier av erfarenhet kombinerar vi djup teknisk expertis med ett modigt hjärta för förnyelse.</p>
                     </div>
-                    <img id="ai-art-image" src="https://placehold.co/1024x1024/111111/3bbef8?text=Klicka+f%C3%B6r+att+generera+AI-konst" alt="AI-genererad bild">
-                </div>
-                <button id="generate-art-button">Generera Ny Bild</button>
-            </section>
-
-            <!-- OM OSS med partikelbakgrund -->
-            <section id="omoss" class="fade-in particle-section">
-                <div id="particles-js"></div>
-                <div class="content-over-particles">
-                    <hgroup>
-                        <h2 data-scramble="true">Varför Tadero?</h2>
-                        <h3>Erfarenhet och resultat du kan lita på.</h3>
-                    </hgroup>
-                    <p>Med över två decennier i teknikbranschen är Tadero inte bara en leverantör – vi är er strategiska partner för allt som rör digitalisering. Vår breda expertis garanterar helhetslösningar som är både robusta och innovativa. Vi har levererat hundratals framgångsrika projekt och förvaltar idag kritisk infrastruktur för en lång rad nöjda kunder. Siffrorna talar för sig själva.</p>
-                    <div class="stats-container grid">
-                        <div class="stat">
-                            <span class="counter" data-target="20">0</span>+
-                            <p class="stat-label">Års Erfarenhet</p>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="counter" data-target="300">0</span>
+                            <p>Projekt</p>
                         </div>
-                        <div class="stat">
-                            <span class="counter" data-target="300">0</span>+
-                            <p class="stat-label">Byggda Hemsidor</p>
-                        </div>
-                        <div class="stat">
-                            <span class="counter" data-target="100">0</span>+
-                            <p class="stat-label">Byggda Appar</p>
-                        </div>
-                        <div class="stat">
-                            <span class="counter" data-target="500">0</span>+
-                            <p class="stat-label">Lagade Enheter</p>
+                        <div class="stat-item">
+                            <span class="counter" data-target="20">0</span>
+                            <p>År</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- NY SEKTION: KUNDCITAT -->
-            <section id="testimonials" class="fade-in">
-                 <hgroup>
-                    <h2 data-scramble="true">Vad våra kunder säger</h2>
-                </hgroup>
-                <article class="testimonial-card">
-                    <blockquote>
-                        "Taderos förmåga att förvandla våra komplexa tekniska behov till en konkret, fungerande lösning var ovärderlig. De är inte bara experter, de är sanna partners som genuint bryr sig om vår framgång."
-                    </blockquote>
-                    <footer class="testimonial-author">
-                        – Anna Svensson, VD på Innovatech Solutions
-                    </footer>
-                </article>
-            </section>
-
-            <!-- UPPDATERAD SEKTION: KONTAKTA OSS -->
+            <!-- KONTAKT -->
             <section id="kontakt" class="fade-in">
-                <hgroup>
-                    <h2 data-scramble="true">Kontakta Oss</h2>
-                    <p>Har du en idé eller ett projekt du vill diskutera? Fyll i formuläret nedan så återkommer vi.</p>
-                </hgroup>
-                <form>
-                    <input type="text" id="name" name="name" placeholder="Ditt namn" required>
-                    <textarea id="message" name="message" placeholder="Ditt meddelande..." required rows="5"></textarea>
-                    <button type="submit">Skicka Meddelande</button>
-                </form>
+                <div class="contact-card">
+                    <h2 data-scramble="true">Redo för nästa steg?</h2>
+                    <p>Låt oss diskutera hur vi kan framtidssäkra er verksamhet.</p>
+                    <form>
+                        <input type="email" placeholder="E-postadress" required>
+                        <button type="submit">Bli kontaktad</button>
+                    </form>
+                </div>
             </section>
         </main>
 
-        <!-- SIDFOT -->
-        <footer class="container">
-            <small>
-                © 2025 Tadero • <a href="mailto:info@tadero.se">info@tadero.se</a> • <a href="#">Integritetspolicy</a>
-            </small>
+        <footer class="container" style="text-align: center; padding: 2rem 0;">
+            <small>© 2025 Tadero • <a href="mailto:info@tadero.se">info@tadero.se</a></small>
         </footer>
     </div>
-    
-    <!-- Förenklad Cookie Banner -->
-    <div id="cookie-consent-banner" class="hidden">
-        <p>Vi använder cookies för att spåra din anslutning och förbättra din upplevelse.</p>
-        <button id="accept-cookies">Acceptera</button>
-    </div>
-    
-    <!-- Script för partikeleffekten -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <!-- Script för tilt-effekten -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
-    <!-- Egen JavaScript-fil -->
     <script src="script.js"></script>
 </body>
 </html>
