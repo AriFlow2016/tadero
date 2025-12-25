@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- INTERAKTIV SPOTLIGHT-MUSPEKARE ---
+    // --- SPOTLIGHT-PEKARE ---
     const spotlight = document.querySelector('.spotlight-cursor');
     if (spotlight) {
         window.addEventListener('mousemove', (e) => {
@@ -12,70 +12,59 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- HÄMTA IP-ADRESS ---
     async function getIpAddress() {
         try {
+            // Vi anropar vår egen funktion för att hämta IP
             const response = await fetch('/.netlify/functions/get-ip');
-            if (!response.ok) throw new Error('IP function not found');
             const data = await response.json();
             const ipSpan = document.querySelector('#ip-display span');
             if (ipSpan) ipSpan.textContent = data.ip;
         } catch (error) {
-            console.error("Kunde inte hämta IP-adress:", error);
+            console.error("IP-fel:", error);
             const ipSpan = document.querySelector('#ip-display span');
-            if (ipSpan) ipSpan.textContent = 'Ansluten';
+            if (ipSpan) ipSpan.textContent = 'Skyddad anslutning';
         }
     }
     getIpAddress();
 
-    // --- AI-GRÄNSSNITT ---
+    // --- AI-CHATT ---
     const aiOutput = document.getElementById('ai-text');
     const aiInput = document.getElementById('ai-input');
     const aiSubmit = document.getElementById('ai-submit');
-    const initialQuote = '"Tadero betyder ett modigt hjärta. Vi hjälper er att navigera i framtidens tekniska landskap med precision och innovation."';
+    const initialText = "Välkommen till Tadero. Jag är din AI-guide för framtidens teknik. Vad kan jag hjälpa dig med idag?";
     let isAiReady = true;
-    let typewriterTimeout;
 
-    function typewriter(text, element, onComplete) {
-        clearTimeout(typewriterTimeout);
+    function typewriter(text, element) {
         let i = 0;
         element.innerHTML = '';
         isAiReady = false;
-
         function type() {
             if (i < text.length) {
                 element.innerHTML += text.charAt(i);
                 i++;
-                typewriterTimeout = setTimeout(type, 25);
+                setTimeout(type, 20);
             } else {
-                if (onComplete) onComplete();
                 isAiReady = true;
             }
         }
         type();
     }
 
-    if (aiOutput) {
-        typewriter(initialQuote, aiOutput);
-    }
+    if (aiOutput) typewriter(initialText, aiOutput);
 
     async function handleAiQuery() {
         if (!isAiReady || !aiInput.value.trim()) return;
-        const userQuery = aiInput.value.trim();
+        const query = aiInput.value.trim();
         aiInput.value = '';
-        isAiReady = false;
+        aiOutput.innerHTML = 'Analyserar...';
         
-        typewriter("Analyserar...", aiOutput);
-
         try {
             const response = await fetch('/.netlify/functions/ask-ai', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ userQuery: userQuery })
+                body: JSON.stringify({ userQuery: query })
             });
-            const result = await response.json();
-            typewriter(result.response, aiOutput);
+            const data = await response.json();
+            typewriter(data.response, aiOutput);
         } catch (error) {
-            typewriter("Ett anslutningsfel uppstod. Försök igen snart.", aiOutput);
-        } finally {
-            isAiReady = true;
+            typewriter("Systemet är tillfälligt under belastning. Försök igen om en kort stund.", aiOutput);
         }
     }
 
@@ -84,42 +73,38 @@ document.addEventListener('DOMContentLoaded', () => {
         aiInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') handleAiQuery(); });
     }
 
-    // --- TEXT SCRAMBLE & FADE IN ---
-    const scramblers = document.querySelectorAll('[data-scramble="true"]');
+    // --- ANIMATIONER VID SCROLL ---
     const faders = document.querySelectorAll('.fade-in');
-    
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('is-visible');
-                // Enkel scramble-effekt vid behov
-                observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.2 });
-
+    }, { threshold: 0.1 });
     faders.forEach(f => observer.observe(f));
 
-    // --- STATISTIK-RÄKNARE ---
+    // --- RÄKNARE ---
     const counters = document.querySelectorAll('.counter');
+    const statsSection = document.querySelector('#om');
     const startCounters = () => {
         counters.forEach(counter => {
             const target = +counter.getAttribute('data-target');
-            const updateCount = () => {
-                const count = +counter.innerText;
-                const speed = target / 100;
+            let count = 0;
+            const inc = target / 50;
+            const update = () => {
                 if (count < target) {
-                    counter.innerText = Math.ceil(count + speed);
-                    setTimeout(updateCount, 20);
+                    count += inc;
+                    counter.innerText = Math.ceil(count);
+                    setTimeout(update, 30);
                 } else {
                     counter.innerText = target;
                 }
             };
-            updateCount();
+            update();
         });
     };
 
-    const statsSection = document.querySelector('#om');
     if (statsSection) {
         const statsObserver = new IntersectionObserver((entries) => {
             if (entries[0].isIntersecting) {
@@ -128,15 +113,5 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, { threshold: 0.5 });
         statsObserver.observe(statsSection);
-    }
-
-    // --- KONTAKTFORMULÄR (Förenklat) ---
-    const contactForm = document.getElementById('simplified-contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = document.getElementById('contact-email').value;
-            window.location.href = `mailto:info@tadero.se?subject=Kontaktförfrågan&body=Hej, jag vill bli kontaktad på: ${email}`;
-        });
     }
 });
